@@ -1,13 +1,11 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: 'exec'
+description: 'run sbt testCompilation'
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  command:  # id of input
+    description: 'command to execute'
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The message to output'
+    default: 'echo "hello"'
+
 runs:
   using: 'node12'
   main: 'dist/index.js'
