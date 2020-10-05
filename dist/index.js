@@ -12,10 +12,11 @@ const exec = __webpack_require__(514);
 const command = core.getInput('command');
 const container = core.getInput('container');
 
+const cwd = process.cwd();
 const workdir = "C:\\dotty";
 
 const pull_command = `docker pull ${container}`;
-const run_command = `docker run --rm -v ".":"${workdir}" -w ${workdir} ${container} pwsh -c '${command}'`;
+const run_command = `docker run --rm -v "${cwd}":"${workdir}" -w ${workdir} ${container} pwsh -c '${command}'`;
 
 // most @actions toolkit packages have async methods
 async function run() {
