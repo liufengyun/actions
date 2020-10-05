@@ -98,6 +98,7 @@ You can now consume the action by referencing the v1 branch
 uses: liufengyun/actions@v1
 with:
   command: echo "hello, world"
+  container: lampepfl/dotty-windows:2020-10-02
 ```
 
 See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:
