@@ -16,7 +16,7 @@ const cwd = process.cwd();
 const workdir = "C:\\dotty";
 
 const pull_command = `docker pull ${container}`;
-const run_command = `docker run --rm -i -v "${cwd}":"${workdir}" -w ${workdir} ${container} pwsh '${command}'`;
+const run_command = `docker run --rm -i -v "${cwd}":"${workdir}" -w ${workdir} ${container} pwsh "${command}"`;
 
 // most @actions toolkit packages have async methods
 async function run() {
