@@ -5,6 +5,9 @@ inputs:
     description: 'command to execute'
     required: true
     default: 'echo "hello"'
+  container:  # id of input
+    description: 'container to use'
+    required: true
 
 runs:
   using: 'node12'
