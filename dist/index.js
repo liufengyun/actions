@@ -15,7 +15,7 @@ const container = core.getInput('container');
 const workdir = "C:\\dotty";
 
 const pull_command = `docker pull ${container}`;
-const run_command = `docker run -it --rm -v ".":"${workdir}" ${container} "${command}"`;
+const run_command = `docker run -it --rm -v ".":"${workdir}" ${container} pwsh -c '${command}'`;
 
 // most @actions toolkit packages have async methods
 async function run() {
