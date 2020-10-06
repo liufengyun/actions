@@ -14,7 +14,7 @@ const run_command = [
   "--isolation", "hyperv",
   "--cpu-count", "8",
   "-m", "16GB",
-  "-v", `"${cwd}":"${workdir}"`,
+  "-v", cwd + ":" + workdir,
   "-v", "C:\\ivy-cache:C:\\.ivy2",
   "-v", "C:\\coursier-cache:C:\\Coursier",
   "-w", workdir,
