@@ -8,24 +8,32 @@ require('./sourcemap-register.js');module.exports =
 const core = __webpack_require__(186);
 const exec = __webpack_require__(514);
 
-// TODO: check command and container to defend against injection or hardcode the commands
+// To defend against injection, never splice the parameters into a string command
 const command = core.getInput('command');
 const container = core.getInput('container');
 
 const cwd = process.cwd();
 const workdir = "C:\\dotty";
 
-const ivy_cache = "C:\\ivy-cache:C:\\.ivy2";
-const coursier_cache = "C:\\coursier-cache:C:\\Coursier";
-
-const pull_command = `docker pull ${container}`;
-const run_command = `docker run --rm -i --isolation hyperv --cpu-count 8 -m 16GB  -v "${cwd}":"${workdir}" -v ${ivy_cache} -v ${coursier_cache} -w ${workdir} ${container} pwsh -Command "${command}"`;
+const pull_command = ["pull", container];
+const run_command = [
+  "run", "--rm", "-i",
+  "--isolation", "hyperv",
+  "--cpu-count", "8",
+  "-m", "16GB",
+  "-v", `"${cwd}":"${workdir}"`,
+  "-v", "C:\\ivy-cache:C:\\.ivy2",
+  "-v", "C:\\coursier-cache:C:\\Coursier",
+  "-w", workdir,
+  container,
+  "pwsh", "-Command", command
+];
 
 // most @actions toolkit packages have async methods
 async function run() {
   try {
-    await exec.exec(pull_command);
-    await exec.exec(run_command);
+    await exec.exec("docker", pull_command);
+    await exec.exec("docker", run_command);
   } catch (error) {
     core.setFailed(error.message);
   }
